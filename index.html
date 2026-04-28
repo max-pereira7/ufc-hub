@@ -15,12 +15,12 @@
             <img src="assets/ufchub-logo.png" class="logo">
         </a>
         <nav>
-            <a href="#">Home</a>
+            <a href="#"><span class="active">Home</span></a>
             <a href="#">Rankings</a>
             <a href="#">Simulador de Lutas</a>
             <a href="#">Estatísticas</a>
             <a href="#">Museu UFC</a>
-            <a href="#">Login</a>
+            <a href="login.html">Login</a>
         </nav>
     </header>
     <main>
@@ -112,7 +112,7 @@
             </p>
 
             <div class="cta-buttons">
-                <button class="btn">Entrar</button>
+                <button class="btn" onclick="irParaLogin()">Entrar</button>
                 <button class="btn">Criar Conta</button>
             </div>
         </section>
@@ -123,3 +123,8 @@
 </body>
 
 </html>
+<script>
+    function irParaLogin() {
+        window.location.href = "login.html";
+    }
+</script>

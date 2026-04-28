@@ -9,26 +9,17 @@
 
 body {
     background-color: #0a0a0a;
-    padding-top: 80px;
 }
-
+/* HEADER */
 .header {
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 20px 40px;
     background: rgba(0, 0, 0, 0.564);
     backdrop-filter: blur(10px);
-}
-
-.header h1 {
-    font-family: 'Bebas Neue', sans-serif;
-    letter-spacing: 1px;
-    font-size: 40px;
-    color: #ff1e1e;
 }
 
 .header .logo {
@@ -54,19 +45,27 @@ body {
     margin-left: 25px;
 }
 
+.active {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+    color: #ff1e1e;
+    border-bottom: 2px solid #ff1e1e;
+}
+
 .header nav a:hover {
     color: #ff1e1e;
     transition: 0.3s;
 }
 
+/* HOME */
 .banner {
     display: flex;
     justify-content: center;
     background: linear-gradient(rgba(0, 0, 0, 0.945), rgba(0, 0, 0, 0.65)),
-    url(assets/banner.jpg);
+    url(../assets/banner.jpg);
     background-position: center;
     background-size: cover;
-    height: 95vh;
+    height: 100vh;
     padding: 60px;
 }
 
@@ -75,7 +74,7 @@ body {
     font-weight: bold;
     font-size: 60px;
     text-align: center;
-    margin-top: 30px;
+    margin-top: 100px;
     margin-bottom: 20px;
     font-family: 'Bebas Neue', sans-serif;
     letter-spacing: 1px;
@@ -263,6 +262,77 @@ body {
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
+}
+
+/* TELA DE LOGIN */
+
+.login-page {
+    min-height: 100vh;
+    padding: 120px 20px 40px; /* espaço pro header */
+    background: linear-gradient(rgba(0, 0, 0, 0.771), rgba(0, 0, 0, 0.771)),
+    url('../assets/octogono.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    background: rgba(0,0,0,0.7);
+    max-width: 350px;
+    width: 90%;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.login-container h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+    color: white;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.login-container span {
+    font-family: 'Bebas Neue', sans-serif;
+    color: #ff1e1e;
+}
+
+.login-container p {
+    color: #aaa;
+    margin-bottom: 25px;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: #1a1a1a;
+    color: white;
+}
+
+.login-container input::placeholder {
+    color: #777;
+}
+
+.login-container .btn {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.register {
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.register a {
+    color: #ff1e1e;
+    text-decoration: none;
 }
 
 .footer {
