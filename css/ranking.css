@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+.ranking-page {
+    padding: 180px 20px 40px;
+}
+
+.ranking-content h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+    letter-spacing: 1px;
+    color: white;
+    text-align: center;
+}
+
+.ranking-content p {
+    color: #aaa;
+    text-align: center;
+    margin-bottom: 150px;
+}
+
+.ranking-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 130px;
+    flex-wrap: wrap;
+}
+
+.ranking-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+    background: linear-gradient(145deg, #0f0f0f, #1c1c1c);
+    border: 1px solid rgba(255,255,255,0.05);
+    min-width: 350px;
+}
+
+.ranking-list h3 {
+    text-align: center;
+    color: #ff1e1e;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.img-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+    transition: 0.1s;
+}
+
+.img-container:hover {
+    transform: scale(1.07);
+}
+
+.ranking-list ul {
+    list-style: none;
+    font-weight: bold;
+}
+
+.ranking-list li {
+    color: white;
+    margin-bottom: 8px;
+}
+
+.ranking-list a {
+    color: white;
+    margin-bottom: 7px;
+    font-size: 16px;
+    transition: 0.4s;
+    text-decoration: none;
+}
+
+.ranking-list .champion {
+    font-family: 'Bebas Neue', sans-serif;
+    color: white;
+    margin-bottom: 7px;
+    font-size: 24px;
+}
+
+.ranking-list .champion:hover {
+    color: #FFC300;
+}
+
+.ranking-list a:hover {
+    color: #ff1e1e;
+}
+
+.ranking-list ul img {
+    margin: auto;
+}
+
+.ranking-list .champion-box {
+    text-align: center;
+}
+
+.ranking-list .number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 1px;
+    color: white;
+    text-align: center;
+}

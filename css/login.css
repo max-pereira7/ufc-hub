@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+.login-page {
+    min-height: 100vh;
+    padding: 120px 20px 40px;
+    background: linear-gradient(rgba(0, 0, 0, 0.771), rgba(0, 0, 0, 0.771)),
+    url('../assets/octogono.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    background: rgba(0,0,0,0.7);
+    max-width: 350px;
+    width: 90%;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.login-container h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+    color: white;
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.login-container span {
+    font-family: 'Bebas Neue', sans-serif;
+    color: #ff1e1e;
+}
+
+.login-container p {
+    color: #aaa;
+    margin-bottom: 25px;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: #1a1a1a;
+    color: white;
+}
+
+.login-container input::placeholder {
+    color: #777;
+}
+
+.login-container .btn {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.register {
+    margin-top: 20px;
+    font-size: 15px;
+}
+
+.register a {
+    color: #ff1e1e;
+    text-decoration : none;
+}

@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    background: rgba(0, 0, 0, 0.564);
+    backdrop-filter: blur(10px);
+}
+
+.header .logo {
+    height: 40px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.logo:hover {
+    transform: scale(1.1);
+}
+
+.header nav {
+    align-self: center;
+}
+
+.header nav a {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+}
+
+.active {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+    color: #ff1e1e;
+    border-bottom: 2px solid #ff1e1e;
+}
+
+.header nav a:hover {
+    color: #ff1e1e;
+    transition: 0.3s;
+}
