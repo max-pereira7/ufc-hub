@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
+@font-face {
+    font-family: 'Bebas Neue';
+    src: url('font/BebasNeue-Regular.ttf') format('truetype');
+}
+
 * {
     margin: 0;
     padding: 0;

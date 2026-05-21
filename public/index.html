@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UFC Hub</title>
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/footer.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"> -->
+    <title>UFC Hub</title>
 </head>
 
 <body>
@@ -63,23 +63,23 @@
         <div class="list locked">
             <ul>
                 <li>
-                    <img src="assets/foto-makhachev.avif" alt="Foto Makhachev">
+                    <img src="assets/atletas/perfil-makhachev.avif" alt="Foto Makhachev">
                     <span>Islam Makhachev</span>
                 </li>
                 <li>
-                    <img src="assets/foto-topuria.avif" alt="Foto Topuria">
+                    <img src="assets/atletas/perfil-topuria.avif" alt="Foto Topuria">
                     <span>Ilia Topuria</span>
                 </li>
                 <li>
-                    <img src="assets/foto-chimaev.avif" alt="Foto Chimaev">
+                    <img src="assets/atletas/perfil-chimaev.avif" alt="Foto Chimaev">
                     <span>Khamzat Chimaev</span>
                 </li>
                 <li>
-                    <img src="assets/foto-volkanovski.avif" alt="Foto Volkanovski">
+                    <img src="assets/atletas/perfil-volkanovski.avif" alt="Foto Volkanovski">
                     <span>Alexander Volkanovski</span>
                 </li>
                 <li>
-                    <img src="assets/foto-poatan.avif" alt="Foto Poatan">
+                    <img src="assets/atletas/perfil-poatan.avif" alt="Foto Poatan">
                     <span>Alex Pereira</span>
                 </li>
             </ul>
@@ -92,7 +92,7 @@
         <div class="cards locked">
             <div class="card">
                 <h3>Ilia "El Matador" Topuria</h3>
-                <img src="assets/foto-topuria.avif" alt="Perfil Topuria">
+                <img src="assets/atletas/perfil-topuria.avif" alt="Perfil Topuria">
                 <p>Altura: 1.70m<br>Vitórias: 17<br>Derrotas: 0</p>
             </div>
             <div class="card vs-card">
@@ -101,7 +101,7 @@
             </div>
             <div class="card">
                 <h3>Alexander "The Great" Volkanovski</h3>
-                <img src="assets/foto-volkanovski.avif" alt="Perfil Volkanovski">
+                <img src="assets/atletas/perfil-volkanovski.avif" alt="Perfil Volkanovski">
                 <p>Altura: 1.68m<br>Vitórias: 28<br>Derrotas: 4</p>
             </div>
         </div>
@@ -114,7 +114,7 @@
         </p>
 
         <button class="btn" onclick="irParaLogin()">Entrar</button>
-        <button class="btn">Criar Conta</button>
+        <button class="btn" onclick="irParaCadastro()">Criar Conta</button>
     </section>
     <footer class="footer">
         <p>© 2026 UFC Hub | Todos direitos reservados</p>
@@ -125,5 +125,8 @@
 <script>
     function irParaLogin() {
         window.location.href = "login.html";
+    }
+    function irParaCadastro() {
+        window.location.href = "cadastro.html";
     }
 </script>

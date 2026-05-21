@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"> -->
+    <title>Login</title>
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html">
+            <img src="assets/ufchub-logo.png" class="logo">
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="#">Rankings</a>
+            <a href="#">Simulador de Lutas</a>
+            <a href="#">Estatísticas</a>
+            <a href="#">Museu UFC</a>
+            <a href="#"><span class="active">Login</span></a>
+        </nav>
+    </header>
+    <section class="login-page">
+        <div class="login-container">
+
+            <h2>Entrar no <span>UFC Hub</span></h2>
+            <p>Acesse sua conta para explorar o sistema</p>
+
+            <form>
+                <input type="email" id="inp_email" placeholder="E-mail" required>
+                <input type="password" id="inp_senha" placeholder="Senha" required>
+
+                <button class="btn" type="button" onclick="entrar()">Entrar</button>
+            </form>
+
+            <p class="register">
+                Não tem conta? <a href="cadastro.html">Cadastre-se</a>
+            </p>
+
+        </div>
+    </section>
+    <footer class="footer">
+        <p>© 2026 UFC Hub | Todos direitos reservados</p>
+    </footer>
+
+</body>
+
+</html>
+<script>
+
+
+    function entrar() {
+
+        var emailVar = inp_email.value;
+        var senhaVar = inp_senha.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            return false;
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+                    window.location.href = "ranking.html";
+                });
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
+
+</script>

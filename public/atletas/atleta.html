@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/global.css">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/footer.css">
+    <link rel="stylesheet" href="../css/atleta.css">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"> -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title id="">Ilia Topuria | UFC</title>
+</head>
+
+<body>
+    <header class="header">
+        <a href="../index.html">
+            <img src="../assets/ufchub-logo.png" class="logo">
+        </a>
+        <nav>
+            <a href="../index.html">Home</a>
+            <a href="#">Rankings</a>
+            <a href="#">Simulador de Lutas</a>
+            <a href="#">Estatísticas</a>
+            <a href="#">Museu UFC</a>
+            <a href="#">Login</a>
+        </nav>
+    </header>
+    <section class="fighter-page">
+        <div class="fighter-info">
+            <h3 class="nickname" id="apelidoLutador">""</h3>
+            <h1 id="nomeLutador"></h1>
+            <p class="record">
+                Categoria <span id="categoriaPeso"></span> <br>
+                <span id="wins"></span>-<span id="losses"></span>-<span id="draws"></span>-<span id="semResult"></span>
+                (V-D-E-SR)
+            </p>
+
+            <div class="stats">
+                <div class="stat">
+                    <h3 id="qtdeKoTop"></h3>
+                    <p>Vitórias por nocaute</p>
+                </div>
+                <div class="stat">
+                    <h3 id="qtdeSubmissaoTop"></h3>
+                    <p>Vitórias por finalização</p>
+                </div>
+                <div class="stat">
+                    <h3 id="primRound"></h3>
+                    <p>Vitórias no 1º round</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="fighter-image">
+            <img id="imagemLutador" src="" alt="">
+        </div>
+
+        <section class="fights">
+
+            <div class="fight-box">
+                <h3>ÚLTIMA LUTA</h3>
+
+                <div class="fight-card">
+                    <img src="../assets/perfil-topuria.avif" alt="">
+                    <img src="../assets/perfil-charles.avif" alt="">
+                    <p>TOPURIA VS OLIVEIRA</p>
+                    <span>28.06.25</span>
+                </div>
+
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="fight-box">
+                <h3>PRÓXIMA LUTA</h3>
+
+                <div class="fight-card">
+                    <img src="../assets/perfil-topuria.avif" alt="">
+                    <img src="../assets/perfil-gaethje.avif" alt="">
+                    <p>TOPURIA VS GAETHJE</p>
+                    <span>14.06.26</span>
+                </div>
+
+            </div>
+
+        </section>
+    </section>
+    <section class="kpi-section">
+
+        <h2>Estatísticas do Lutador</h2>
+
+        <div class="kpi-container">
+            <div class="kpi-card">
+                <h3>KO/TKO</h3>
+                <p class="kpi-number" id="qtdeKoCard"></p>
+                <span>Vitórias por nocaute</span>
+            </div>
+
+            <div class="kpi-card">
+                <h3>Submissões</h3>
+                <p class="kpi-number" id="qtdeSubmissaoCard"></p>
+                <span>Vitórias por finalização</span>
+            </div>
+
+            <div class="kpi-card">
+                <h3>Decisão</h3>
+                <p class="kpi-number" id="qtdeDecisaoCard"></p>
+                <span>Vitórias por decisão</span>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- GRÁFICOS DE STRIKING E QUEDAS -->
+
+    <section class="accurancy-charts">
+        <div class="accurancy-card">
+            <div class="chart-title">
+                <h2>Precisão de Golpes</h2>
+            </div>
+            <div class="accurancy-chart-container">
+                <canvas id="strikingChart"></canvas>
+                <h2 id="precisaoGolpes"></h2>
+            </div>
+            <div class="accurancy-stats-info">
+                <div class="accurancy-stat-box">
+                    <h2 id="golpesConectados"></h2>
+                    <p>Golpes Sig. Conectados</p>
+                </div>
+                <div class="accurancy-stat-box">
+                    <h2 id="golpesDesferidos"></h2>
+                    <p>Golpes Sig. Desferidos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="accurancy-card">
+            <div class="chart-title">
+                <h2>Precisão de Quedas</h2>
+            </div>
+            <div class="accurancy-chart-container">
+                <canvas id="takedownChart"></canvas>
+                <h2 id="precisaoQuedas"></h2>
+            </div>
+            <div class="accurancy-stats-info">
+                <div class="accurancy-stat-box">
+                    <h2 id="quedasAplicadas"></h2>
+                    <p>Quedas Aplicadas</p>
+                </div>
+                <div class="accurancy-stat-box">
+                    <h2 id="quedasTentativas"></h2>
+                    <p>Tentativas de Queda</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ESTATÍSTICAS -->
+
+    <section class="stats-section">
+
+        <div class="stats-card">
+            <div class="stat-box">
+                <h2 id="golpesConecMin"></h2>
+                <p>GOLPES SIG. CONECTADOS</p>
+                <span>POR MINUTO</span>
+            </div>
+            <div class="stat-box">
+                <h2 id="golpesAbsMin"></h2>
+                <p>GOLPES SIG. ABSORVIDOS</p>
+                <span>POR MINUTO</span>
+            </div>
+            <div class="stat-box">
+                <h2 id="defesaGolpes"></h2>
+                <p>DEFESA DE GOLPES SIG.</p>
+                <span>NA CARREIRA</span>
+            </div>
+            <div class="stat-box">
+                <h2 id="mediaKnock"></h2>
+                <p>MÉDIA DE KNOCKDOWNS</p>
+                <span>POR 15 MIN</span>
+            </div>
+        </div>
+        <div class="stats-card">
+            <div class="stat-box">
+                <h2 id="mediaQuedas"></h2>
+                <p>MÉDIA DE QUEDAS</p>
+                <span>POR 15 MINUTOS</span>
+            </div>
+            <div class="stat-box">
+                <h2 id="defesaQuedas">%</h2>
+                <p>DEFESA DE QUEDAS</p>
+                <span>NA CARREIRA</span>
+            </div>
+            <div class="stat-box">
+                <h2 id="mediaFin"></h2>
+                <p>MÉDIA DE FINALIZAÇÕES</p>
+                <span>POR 15 MIN</span>
+            </div>
+            <div class="stat-box">
+                <h2 id="tempoMedio"></h2>
+                <p>TEMPO MÉDIO DE LUTA</p>
+                <span>NA CARREIRA</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- GRÁFICOS DE INFORMAÇÕES -->
+
+    <div class="performance-section">
+
+        <div class="performance-card">
+            <div class="chart-title">
+                <h2>Golpes Significativos por Posição</h2>
+            </div>
+            <div class="row">
+                <div class="key">
+                    <h2>Em Pé</h2>
+                </div>
+                <div class="value">
+                    <span id="golpesEmPe"></span>
+                    <span id="porcentagemEmPe"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="key">
+                    <h2>Clinche</h2>
+                </div>
+                <div class="value">
+                    <span id="golpesClinche"></span>
+                    <span id="porcentagemClinche"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="key">
+                    <h2>Solo</h2>
+                </div>
+                <div class="value">
+                    <span id="golpesChao"></span>
+                    <span id="porcentagemSolo"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="performance-card">
+            <div class="chart-title">
+                <h2>Vitórias por Método</h2>
+            </div>
+            <div class="row">
+                <div class="key">
+                    <h2>KO/TKO</h2>
+                </div>
+                <div class="value">
+                    <span id="qtdeKoBottom"></span>
+                    <span id="porcentagemKo"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="key">
+                    <h2>Finalização</h2>
+                </div>
+                <div class="value">
+                    <span id="qtdeSubmissaoBottom"></span>
+                    <span id="porcentagemSubmissao"></span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="key">
+                    <h2>Decisão</h2>
+                </div>
+                <div class="value">
+                    <span id="qtdeDecisaoBottom"></span>
+                    <span id="porcentagemDecisao"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <footer class="footer">
+        <p>© 2026 UFC Hub | Todos direitos reservados</p>
+    </footer>
+</body>
+
+</html>
+
+<script>
+
+    window.onload = function () {
+        carregarDadosLutador();
+        carregarDadosCartel();
+        carregarEstatisticas();
+    }
+
+    const strikingCtx = document.getElementById('strikingChart');
+
+    const takedownCtx = document.getElementById('takedownChart');
+
+    var parametros = new URLSearchParams(window.location.search);
+
+    var idLutador = parametros.get("id");
+
+    function carregarDadosLutador() {
+
+        fetch(`/lutadores/dados/${idLutador}`)
+            .then(function (resposta) {
+                return resposta.json();
+
+            })
+            .then(function (resposta) {
+
+                var dados = resposta[0];
+                console.log(dados);
+                nomeLutador.innerHTML = dados.nome;
+                apelidoLutador.innerHTML = `"${dados.apelido}"`;
+                categoriaPeso.innerHTML = dados.categoria;
+                imagemLutador.src = dados.imagem;
+
+            });
+    }
+
+    function carregarDadosCartel() {
+
+        fetch(`/lutadores/cartel/${idLutador}`)
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (resposta) {
+                var dados = resposta[0];
+
+                console.log(dados);
+
+                wins.innerHTML = dados.vitorias;
+                losses.innerHTML = dados.derrotas;
+                draws.innerHTML = dados.empates;
+                semResult.innerHTML = dados.sem_resultado;
+                qtdeKoTop.innerHTML = dados.ko_tko;
+                qtdeSubmissaoTop.innerHTML = dados.finalizacao;
+                primRound.innerHTML = dados.vitorias_primeiro_round;
+                qtdeKoCard.innerHTML = dados.ko_tko;
+                qtdeSubmissaoCard.innerHTML = dados.finalizacao;
+                qtdeDecisaoCard.innerHTML = dados.decisao;
+                qtdeKoBottom.innerHTML = dados.ko_tko;
+                qtdeSubmissaoBottom.innerHTML = dados.finalizacao;
+                qtdeDecisaoBottom.innerHTML = dados.decisao;
+                porcentagemKo.innerHTML = `(${dados.porcentagem_ko}%)`;
+                porcentagemSubmissao.innerHTML = `(${dados.porcentagem_finalizacao}%)`;
+                porcentagemDecisao.innerHTML = `(${dados.porcentagem_decisao}%)`; 
+            })
+    }
+
+    function carregarEstatisticas() {
+        fetch(`/lutadores/estatisticas/${idLutador}`)
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (resposta) {
+                var dados = resposta[0];
+                precisaoGolpes.innerHTML = `${dados.precisao_golpes}%`;
+                precisaoQuedas.innerHTML = `${dados.precisao_quedas}%`;
+                golpesConectados.innerHTML = dados.golpes_sig_conectados_total;
+                golpesDesferidos.innerHTML = dados.golpes_sig_desferidos_total;
+                quedasAplicadas.innerHTML = dados.quedas_aplicadas;
+                quedasTentativas.innerHTML = dados.quedas_tentativas;
+                golpesConecMin.innerHTML = dados.golpes_sig_conectados_total;
+                golpesAbsMin.innerHTML = dados.golpes_sig_absorvidos_por_min;
+                defesaGolpes.innerHTML = `${dados.golpes_sig_defesa_porcentagem}%`;
+                mediaKnock.innerHTML = dados.media_knockdowns_por_15_min;
+                mediaQuedas.innerHTML = dados.media_quedas_por_15_min;
+                defesaQuedas.innerHTML = `${dados.quedas_defesa_porcentagem}%`;
+                mediaFin.innerHTML = dados.media_finalizacoes_por_15_min;
+                tempoMedio.innerHTML = dados.tempo_medio_luta.slice(0, 5);
+                golpesEmPe.innerHTML = dados.golpes_sig_em_pe;
+                golpesClinche.innerHTML = dados.golpes_sig_clinche;
+                golpesChao.innerHTML = dados.golpes_sig_solo;
+                porcentagemEmPe.innerHTML = `(${dados.porcentagem_em_pe}%)`;
+                porcentagemClinche.innerHTML = `(${dados.porcentagem_clinche}%)`;
+                porcentagemSolo.innerHTML = `(${dados.porcentagem_solo}%)`;
+
+                new Chart(strikingCtx, {
+
+                    type: 'doughnut',
+
+                    data: {
+
+                        datasets: [{
+
+                            data: [dados.precisao_golpes,
+                            100 - dados.precisao_golpes],
+
+                            backgroundColor: [
+                                '#ff1e1e',
+                                '#2a2a2a'
+                            ],
+
+                            borderWidth: 0
+
+                        }]
+                    },
+
+                });
+
+                new Chart(takedownCtx, {
+
+                    type: 'doughnut',
+
+                    data: {
+
+                        datasets: [{
+
+                            data: [dados.precisao_quedas, 100 - dados.precisao_quedas],
+
+                            backgroundColor: [
+                                '#ff1e1e',
+                                '#2a2a2a'
+                            ],
+
+                            borderWidth: 0
+
+                        }]
+                    },
+                });
+
+            })
+    }
+</script>
