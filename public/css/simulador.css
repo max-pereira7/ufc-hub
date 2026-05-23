@@ -1,0 +1,172 @@
+.simulator {
+    background-color: #0b0b0b;
+    padding: 60px;
+    color: white;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 60px;
+    padding-top: 120px;
+}
+
+.title h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 50px;
+    letter-spacing: 1px;
+    color: #ff1e1e;
+}
+
+.title p {
+    font-family: Arial;
+    color: #969696;
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+.fighter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+}
+
+.fighter-card {
+    width: 350px;
+    background-color: #141313;
+    border-radius: 25px;
+    padding: 30px;
+    text-align: center;
+    border: 1px solid #181818;
+}
+
+.corner {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.red {
+    background-color: #ff1e1e;
+}
+
+.blue {
+    background-color: #2360e3;
+}
+
+.fighter-card select {
+    appearance: none;
+    width: 100%;
+    padding: 15px;
+    border-radius: 15px;
+    border: none;
+    background-color: #1c1c1c;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 25px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.fighter-card img {
+    max-width: 170px;
+}
+
+.fighter-card h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 1px;
+    font-size: 34px;
+    margin-top: 15px;
+}
+
+.fighter-card p {
+    font-family: Arial;
+    color: #ff1e1e;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.fighter-card .key {
+    color: white;
+}
+
+.fighter-info {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+}
+
+.vs {
+    font-size: 60px;
+    color: #ff1e1e;
+    font-weight: bold;
+}
+
+.button {
+    text-align: center;
+    margin-top: 60px;
+}
+
+.btn-simular {
+    padding: 18px 50px;
+    border: none;
+    border-radius: 18px;
+    background-color: white;
+    color: black;
+    font-size: 24px;
+    cursor: pointer;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.result {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.result h2 {
+    font-size: 42px;
+    color: #ff1e1e;
+    font-family: 'Bebas Neue', sans-serif;
+    margin-bottom: 30px;
+}
+
+.chances {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.chance-box {
+    width: 220px;
+    background-color: #151515;
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid #222;
+}
+
+.chance-box h3 {
+    font-size: 48px;
+    font-family: 'Bebas Neue', sans-serif;
+}
+
+.chance-box p {
+    margin-top: 10px;
+    color: white;
+    font-weight: bold;
+    font-family: Arial;
+}
+
+.red-side h3 {
+    color: #ff1e1e;
+}
+
+.blue-side h3 {
+    color: #2563eb;
+}

@@ -8,9 +8,8 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/footer.css">
     <link rel="stylesheet" href="../css/atleta.css">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title id="">Ilia Topuria | UFC</title>
+    <title></title>
 </head>
 
 <body>
@@ -316,7 +315,7 @@
                 apelidoLutador.innerHTML = `"${dados.apelido}"`;
                 categoriaPeso.innerHTML = dados.categoria;
                 imagemLutador.src = dados.imagem;
-
+                document.title = `${dados.nome} | UFC Hub`;
             });
     }
 

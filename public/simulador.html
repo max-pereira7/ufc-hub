@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Lutas | UFC Hub</title>
+
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/simulador.css">
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html">
+            <img src="assets/ufchub-logo.png" class="logo">
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="ranking.html">Rankings</a>
+            <a href="#"><span class="active">Simulador de Lutas</span></a>
+            <a href="#">Estatísticas</a>
+            <a href="#">Museu UFC</a>
+            <a href="#">Login</a>
+        </nav>
+    </header>
+
+    <section class="simulator">
+
+        <div class="title">
+            <h1>SIMULADOR DE LUTAS</h1>
+            <p>Escolha dois lutadores e simule quem venceria</p>
+        </div>
+
+        <div class="fighter-container">
+
+            <!-- LUTADOR 1 -->
+            <div class="fighter-card">
+
+                <div class="corner red">
+                    RED CORNER
+                </div>
+
+                <select id="selectLutador1" onchange="trocarLutador1()">
+                    <option value="">Selecione um lutador</option>
+                </select>
+
+                <img id="imgLutador1" src="">
+
+                <h2 id="nomeLutador1">
+                    Nome do Lutador
+                </h2>
+                <div class="fighter-info">
+                    <div>
+                        <p class="key">IDADE</p>
+                        <p id="idadeLutador1">
+                            --
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="key">ALTURA</p>
+                        <p id="alturaLutador1">
+                            --
+                        </p>
+                    </div>
+                    <div>
+                        <p class="key">PESO</p>
+                        <p id="pesoLutador1">
+                            --
+                        </p>
+                    </div>
+                    <div>
+                        <p class="key">CARTEL</p>
+                        <p id="cartelLutador1">
+                            --
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- VS -->
+
+            <div class="vs">
+                VS
+            </div>
+
+            <!-- LUTADOR 2 -->
+
+            <div class="fighter-card">
+
+                <div class="corner blue">
+                    BLUE CORNER
+                </div>
+
+                <select id="selectLutador2" onchange="trocarLutador2()">
+                    <option value="">Selecione um lutador</option>
+                </select>
+
+                <img id="imgLutador2" src="">
+
+                <h2 id="nomeLutador2">
+                    Nome do Lutador
+                </h2>
+                <div class="fighter-info">
+                    <div>
+                        <p class="key">IDADE</p>
+                        <p id="idadeLutador2">
+                            --
+                        </p>
+                    </div>
+
+                    <div>
+                        <p class="key">ALTURA</p>
+                        <p id="alturaLutador2">
+                            --
+                        </p>
+                    </div>
+                    <div>
+                        <p class="key">PESO</p>
+                        <p id="pesoLutador2">
+                            --
+                        </p>
+                    </div>
+                    <div>
+                        <p class="key">CARTEL</p>
+                        <p id="cartelLutador2">
+                            --
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="button">
+            <button class="btn-simular" onclick="simularLuta()">
+                SIMULAR LUTA
+            </button>
+        </div>
+
+        <div class="result" id="resultadoSimulacao">
+
+            <h2 id="vencedor">
+                --
+            </h2>
+
+            <div class="chances">
+
+                <div class="chance-box red-side">
+                    <h3 id="chanceLutador1">
+                        50%
+                    </h3>
+
+                    <p id="nomeChance1">
+                        Lutador 1
+                    </p>
+                </div>
+
+                <div class="chance-box blue-side">
+                    <h3 id="chanceLutador2">
+                        50%
+                    </h3>
+
+                    <p id="nomeChance2">
+                        Lutador 2
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>
+
+<script>
+
+    window.onload = function () {
+        carregarLutadores();
+    }
+
+    function carregarLutadores() {
+
+        fetch("/lutadores/listar")
+            .then(function (resposta) {
+
+                return resposta.json();
+
+            })
+            .then(function (lutadores) {
+
+                for (var i = 0; i < lutadores.length; i++) {
+
+                    var lutador = lutadores[i];
+
+                    selectLutador1.innerHTML += `
+                    <option value="${lutador.id_lutador}">
+                        ${lutador.nome}
+                    </option>
+                `;
+
+                    selectLutador2.innerHTML += `
+                    <option value="${lutador.id_lutador}">
+                        ${lutador.nome}
+                    </option>
+                `;
+                }
+
+            });
+
+    }
+
+    var lutador1;
+    var lutador2;
+
+    function trocarLutador1() {
+
+        var idLutador = selectLutador1.value;
+
+        fetch(`/lutadores/dados/${idLutador}`)
+            .then(function (resposta) {
+
+                return resposta.json();
+
+            })
+            .then(function (resposta) {
+
+                lutador1 = resposta[0];
+
+                imgLutador1.src = lutador1.imagem;
+
+                nomeLutador1.innerHTML = lutador1.nome;
+                var dataNascimento = new Date(lutador1.dt_nascimento);
+
+                var anoNascimento = dataNascimento.getFullYear();
+
+                var anoAtual = new Date().getFullYear();
+
+                var idade = anoAtual - anoNascimento;
+
+                idadeLutador1.innerHTML = `${idade}`;
+                alturaLutador1.innerHTML = `${lutador1.altura}`;
+                pesoLutador1.innerHTML = lutador1.peso;
+
+            });
+
+        fetch(`/lutadores/cartel/${idLutador}`)
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (resposta) {
+
+                var cartel = resposta[0];
+
+                lutador1.vitorias = cartel.vitorias;
+                lutador1.derrotas = cartel.derrotas;
+                lutador1.empates = cartel.empates;
+                lutador1.ko = cartel.ko_tko;
+                lutador1.finalizacao = cartel.finalizacao;
+                lutador1.decisao = cartel.decisao;
+
+                cartelLutador1.innerHTML = `
+                ${cartel.vitorias}-${cartel.derrotas}-${cartel.empates}
+            `;
+
+            });
+    }
+
+    function trocarLutador2() {
+
+        var idLutador = selectLutador2.value;
+
+        fetch(`/lutadores/dados/${idLutador}`)
+            .then(function (resposta) {
+
+                return resposta.json();
+
+            })
+            .then(function (resposta) {
+
+                lutador2 = resposta[0];
+
+                imgLutador2.src = lutador2.imagem;
+                nomeLutador2.innerHTML = lutador2.nome;
+
+                var dataNascimento = new Date(lutador2.dt_nascimento);
+
+                var anoNascimento = dataNascimento.getFullYear();
+
+                var anoAtual = new Date().getFullYear();
+
+                var idade = anoAtual - anoNascimento;
+
+                idadeLutador2.innerHTML = `${idade}`;
+                alturaLutador2.innerHTML = `${lutador2.altura}`;
+                pesoLutador2.innerHTML = lutador2.peso;
+
+            });
+
+        fetch(`/lutadores/cartel/${idLutador}`)
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (resposta) {
+
+                var cartel = resposta[0];
+
+                lutador2.vitorias = cartel.vitorias;
+                lutador2.derrotas = cartel.derrotas;
+                lutador2.empates = cartel.empates;
+                lutador2.ko = cartel.ko_tko;
+                lutador2.finalizacao = cartel.finalizacao;
+                lutador2.decisao = cartel.decisao;
+
+                cartelLutador2.innerHTML = `
+                ${cartel.vitorias}-${cartel.derrotas}-${cartel.empates}
+            `;
+
+            });
+
+    }
+
+    function simularLuta() {
+
+        var pontos1 = calcularPontuacao(lutador1);
+
+        var pontos2 = calcularPontuacao(lutador2);
+
+        var total = pontos1 + pontos2;
+
+        var chance1 = (pontos1 / total) * 100;
+
+        var chance2 = (pontos2 / total) * 100;
+
+        chance1 = chance1.toFixed(1);
+
+        chance2 = chance2.toFixed(1);
+
+        chanceLutador1.innerHTML = `${chance1}%`;
+
+        chanceLutador2.innerHTML = `${chance2}%`;
+
+        nomeChance1.innerHTML = lutador1.nome;
+
+        nomeChance2.innerHTML = lutador2.nome;
+
+        if (chance1 > chance2) {
+            vencedor.innerHTML = `<span style="color:white; font-family: 'Bebas Neue'">${lutador1.nome}</span> é o favorito! `;
+            if (lutador1.ko > lutador1.finalizacao && lutador1.ko > lutador1.decisao) {
+                vencedor.innerHTML += `Com uma vitória por KO/TKO!`;
+            } else if (lutador2.finalizacao > lutador2.ko && lutador2.finalizacao > lutador2.decisao) {
+                vencedor.innerHTML += `<span style="color:white; font-family: 'Bebas Neue'">Com uma Vitória por 
+                </span>Finalização!`;
+            }
+        } else if (chance1 < chance2) {
+            vencedor.innerHTML = `<span style="color:white; font-family: 'Bebas Neue'">${lutador2.nome}</span> é o favorito! `;
+            if (lutador1.ko > lutador1.finalizacao && lutador1.ko > lutador1.decisao) {
+                vencedor.innerHTML += `Com uma vitória por KO/TKO!`;
+            } else if (lutador2.finalizacao > lutador2.ko && lutador2.finalizacao > lutador2.decisao) {
+                vencedor.innerHTML += `<span style="color:white; font-family: 'Bebas Neue'">Com uma Vitória por 
+                </span>Finalização!`;
+            }
+
+            console.log(chance1);
+            console.log(chance2);
+
+        }
+
+        function calcularPontuacao(lutador) {
+            var pontos = 0;
+
+            if (lutador.idade >= 27 && lutador.idade <= 34) {
+                pontos += 15;
+            }
+
+            if (lutador.idade > 36) {
+                pontos -= 10;
+            }
+
+            pontos += lutador.altura * 10;
+
+            pontos += lutador.peso * 1;
+
+            pontos += lutador.vitorias * 2;
+
+            pontos -= lutador.derrotas * 1.5;
+
+            if (lutador.derrotas == 0 && lutador.vitorias >= 10) {
+                pontos += 20;
+            }
+
+            var totalLutas =
+                lutador.vitorias +
+                lutador.derrotas +
+                lutador.empates;
+
+            pontos += totalLutas * 0.5;
+
+            return pontos;
+        }
+    }
+</script>

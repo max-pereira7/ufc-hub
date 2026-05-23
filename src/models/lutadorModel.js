@@ -118,8 +118,14 @@ function buscarDadosEstatisticas(idLutador) {
     return database.executar(instrucaoSql);
 }
 
+function buscarLutadores() {
+    var instrucaoSql = `SELECT * FROM lutador;`;
+    return database.executar(instrucaoSql);
+}
+
 module.exports = {
     buscarDadosLutador,
     buscarDadosCartel,
-    buscarDadosEstatisticas
+    buscarDadosEstatisticas,
+    buscarLutadores
 }

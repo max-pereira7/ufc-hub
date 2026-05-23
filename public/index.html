@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/footer.css">
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet"> -->
     <title>UFC Hub</title>
 </head>
 
@@ -20,10 +19,11 @@
         <nav>
             <a href="#"><span class="active">Home</span></a>
             <a href="ranking.html">Rankings</a>
-            <a href="#">Simulador de Lutas</a>
+            <a href="simulador.html">Simulador de Lutas</a>
             <a href="#">Estatísticas</a>
             <a href="#">Museu UFC</a>
             <a href="login.html">Login</a>
+            <a href="login.html" style="display: none;">Sair</a>
         </nav>
     </header>
     <section class="banner">
@@ -128,5 +128,8 @@
     }
     function irParaCadastro() {
         window.location.href = "cadastro.html";
+    }
+    if (sessionStorage.getItem("logado") === "true") {
+        
     }
 </script>
