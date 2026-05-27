@@ -1,22 +1,22 @@
-    var express = require("express");
-    var router = express.Router();
+var express = require("express");
+var router = express.Router();
 
-    var lutadorController = require("../controllers/lutadorController");
+var lutadorController = require("../controllers/lutadorController");
 
-    router.get("/dados/:idLutador", function (req, res) {
-        lutadorController.buscarDadosLutador(req, res);
-    });
+router.get("/dados/:idLutador", function (req, res) {
+    lutadorController.buscarDadosLutador(req, res);
+});
 
-    router.get("/cartel/:idLutador", function (req, res) {
-        lutadorController.buscarDadosCartel(req, res);
-    });
+router.get("/cartel/:idLutador", function (req, res) {
+    lutadorController.buscarDadosCartel(req, res);
+});
 
-    router.get("/estatisticas/:idLutador", function (req, res) {
-        lutadorController.buscarDadosEstatisticas(req, res);
-    });
+router.get("/estatisticas/:idLutador", function (req, res) {
+    lutadorController.buscarDadosEstatisticas(req, res);
+});
 
-    router.get("/listar", function (req, res) {
-        lutadorController.buscarLutadores(req, res);
-    });
+router.get("/listar", function (req, res) {
+    lutadorController.buscarLutadores(req, res);
+});
 
-    module.exports = router;
+module.exports = router;

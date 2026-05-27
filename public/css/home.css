@@ -8,10 +8,11 @@
     background-position: center;
     background-size: cover;
     height: 100vh;
-    padding: 60px;
+    /* padding: 60px; */
+    padding: 140px 60px 60px;
 }
 
-.banner-content h1 {
+.banner-title h1 {
     color: white;
     font-weight: bold;
     font-size: 60px;
@@ -22,13 +23,13 @@
     letter-spacing: 1px;
 }
 
-.banner-content span {
+.banner-title span {
     font-family: 'Bebas Neue', sans-serif;
     letter-spacing: 1px;
     color: #ff1e1e;
 }
 
-.banner-content p {
+.banner-title p {
     color: rgb(255, 255, 255);
     font-size: 18px;
     text-align: center;
@@ -38,7 +39,7 @@
 
 .btn {
     display: block;
-    margin: 50px auto;
+    margin: 30px auto;
     cursor: pointer;
     padding: 14px 30px;
     border-radius: 8px;

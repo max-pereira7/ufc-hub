@@ -1,25 +1,24 @@
-.simulator {
+.simulator-page {
     background-color: #0b0b0b;
-    padding: 60px;
     color: white;
+    padding: 140px 60px 60px;
 }
 
-.title {
+.simulator-title {
     text-align: center;
     margin-bottom: 60px;
-    padding-top: 120px;
 }
 
-.title h1 {
+.simulator-title h2 {
     font-family: 'Bebas Neue', sans-serif;
     font-size: 50px;
     letter-spacing: 1px;
-    color: #ff1e1e;
+    color: white;
 }
 
-.title p {
+.simulator-title p {
     font-family: Arial;
-    color: #969696;
+    color: #aaa;
     margin-top: 10px;
     font-size: 18px;
 }

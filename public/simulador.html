@@ -20,23 +20,21 @@
         <nav>
             <a href="index.html">Home</a>
             <a href="ranking.html">Rankings</a>
+            <a href="museu.html">Museu UFC</a>
             <a href="#"><span class="active">Simulador de Lutas</span></a>
-            <a href="#">Estatísticas</a>
-            <a href="#">Museu UFC</a>
-            <a href="#">Login</a>
+            <a href="login.html">Login</a>
         </nav>
     </header>
 
-    <section class="simulator">
+    <section class="simulator-page">
 
-        <div class="title">
-            <h1>SIMULADOR DE LUTAS</h1>
+        <div class="simulator-title">
+            <h2>SIMULADOR DE LUTAS</h2>
             <p>Escolha dois lutadores e simule quem venceria</p>
         </div>
 
         <div class="fighter-container">
 
-            <!-- LUTADOR 1 -->
             <div class="fighter-card">
 
                 <div class="corner red">
@@ -82,13 +80,9 @@
 
             </div>
 
-            <!-- VS -->
-
             <div class="vs">
                 VS
             </div>
-
-            <!-- LUTADOR 2 -->
 
             <div class="fighter-card">
 
@@ -247,6 +241,8 @@
 
                 var idade = anoAtual - anoNascimento;
 
+                lutador1.idade = idade;
+
                 idadeLutador1.innerHTML = `${idade}`;
                 alturaLutador1.innerHTML = `${lutador1.altura}`;
                 pesoLutador1.innerHTML = lutador1.peso;
@@ -299,6 +295,8 @@
                 var anoAtual = new Date().getFullYear();
 
                 var idade = anoAtual - anoNascimento;
+
+                lutador2.idade = idade;
 
                 idadeLutador2.innerHTML = `${idade}`;
                 alturaLutador2.innerHTML = `${lutador2.altura}`;
@@ -370,32 +368,29 @@
                 </span>Finalização!`;
             }
 
-            console.log(chance1);
-            console.log(chance2);
-
         }
 
         function calcularPontuacao(lutador) {
             var pontos = 0;
 
             if (lutador.idade >= 27 && lutador.idade <= 34) {
-                pontos += 15;
+                pontos += 20;
             }
 
-            if (lutador.idade > 36) {
-                pontos -= 10;
+            if (lutador.idade > 35) {
+                pontos -= 25;
             }
 
             pontos += lutador.altura * 10;
 
-            pontos += lutador.peso * 1;
+            pontos += lutador.peso * 20;
 
-            pontos += lutador.vitorias * 2;
+            pontos += lutador.vitorias * 4;
 
-            pontos -= lutador.derrotas * 1.5;
+            pontos -= lutador.derrotas * 4;
 
-            if (lutador.derrotas == 0 && lutador.vitorias >= 10) {
-                pontos += 20;
+            if (lutador.derrotas == 0 && lutador.vitorias >= 15) {
+                pontos += 80;
             }
 
             var totalLutas =

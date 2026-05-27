@@ -1,0 +1,67 @@
+.museum-page {
+    background-color: #0b0b0b;
+    min-height: 100vh;
+    padding: 140px 60px 60px;
+    color: white;
+}
+
+.museum-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.museum-title h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 55px;
+    color: #ff1e1e;
+    letter-spacing: 1px;
+}
+
+.museum-title p {
+    font-family: Arial;
+    color: #aaa;
+    font-size: 18px;
+    margin-bottom: 90px;
+}
+
+.museum-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+}
+
+.museum-card {
+    width: 400px;
+    background-color: #151515;
+    border-radius: 20px;
+    border: 1px solid #222;
+    transition: 0.3s;
+}
+
+.museum-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.3);
+}
+
+.museum-card img {
+    width: 100%;
+    height: 220px;
+}
+
+.museum-info {
+    padding: 20px;
+}
+
+.museum-info h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.museum-info p {
+    font-family: Arial;
+    color: #bbb;
+    font-size: 15px;
+    line-height: 22px;
+}
