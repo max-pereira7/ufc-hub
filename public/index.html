@@ -108,7 +108,7 @@
     <section class="cta">
         <h2>Desbloqueie o modo completo</h2>
         <p>
-            Faça login para acessar comparações avançadas, simulações de lutas,
+            Faça login para acessar estatísticas avançadas, simulações de lutas,
             rankings completos e muito mais.
         </p>
 
@@ -128,7 +128,11 @@
     function irParaCadastro() {
         window.location.href = "cadastro.html";
     }
-    if (sessionStorage.getItem("logado") === "true") {
+    function verificarLogin() {
 
+    if (sessionStorage.getItem("logado") !== "true") {
+
+        window.location = "../login.html";
     }
+}
 </script>

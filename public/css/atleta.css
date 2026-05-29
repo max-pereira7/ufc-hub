@@ -120,6 +120,15 @@
     transform: scale(1.05);
 }
 
+.fight-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    white-space: nowrap;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30px;
+}
 /* KPI'S DE VITÓRIAS */
 
 .kpi-section h2 {

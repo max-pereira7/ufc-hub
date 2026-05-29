@@ -19,11 +19,10 @@
         </a>
         <nav>
             <a href="../index.html">Home</a>
-            <a href="#">Rankings</a>
-            <a href="#">Simulador de Lutas</a>
-            <a href="#">Estatísticas</a>
-            <a href="#">Museu UFC</a>
-            <a href="#">Login</a>
+            <a href="../ranking.html">Rankings</a>
+            <a href="../museu.html">Museu UFC</a>
+            <a href="../simulador.html">Simulador de Lutas</a>
+            <a href="../login.html">Login</a>
         </nav>
     </header>
     <section class="fighter-page">
@@ -59,13 +58,21 @@
         <section class="fights">
 
             <div class="fight-box">
+
                 <h3>ÚLTIMA LUTA</h3>
 
                 <div class="fight-card">
-                    <img src="../assets/perfil-topuria.avif" alt="">
-                    <img src="../assets/perfil-charles.avif" alt="">
-                    <p>TOPURIA VS OLIVEIRA</p>
-                    <span>28.06.25</span>
+                    <img id="perfilLutadorRed" src="">
+                    <img id="perfilLutadorBlue" src="">
+
+                    <div class="fight-name">
+                        <p id="nomeLutadorRed"></p>
+                        <p>VS</p>
+                        <p id="nomeLutadorBlue"></p>
+                    </div>
+
+                    <p id="nomeEvento"></p>
+                    <p id="dataLuta"></p>
                 </div>
 
             </div>
@@ -73,13 +80,21 @@
             <div class="divider"></div>
 
             <div class="fight-box">
+
                 <h3>PRÓXIMA LUTA</h3>
 
                 <div class="fight-card">
-                    <img src="../assets/perfil-topuria.avif" alt="">
-                    <img src="../assets/perfil-gaethje.avif" alt="">
-                    <p>TOPURIA VS GAETHJE</p>
-                    <span>14.06.26</span>
+                    <img id="perfilLutadorRedProx" src="">
+                    <img id="perfilLutadorBlueProx" src="">
+
+                    <div class="fight-name">
+                        <p id="nomeLutadorRedProx"></p>
+                        <p>VS</p>
+                        <p id="nomeLutadorBlueProx"></p>
+                    </div>
+
+                    <p id="nomeEventoProx"></p>
+                    <p id="dataLutaProx"></p>
                 </div>
 
             </div>
@@ -290,6 +305,8 @@
         carregarDadosLutador();
         carregarDadosCartel();
         carregarEstatisticas();
+        carregarUltimaLuta();
+        carregarProximaLuta();
     }
 
     const strikingCtx = document.getElementById('strikingChart');
@@ -345,7 +362,7 @@
                 qtdeDecisaoBottom.innerHTML = dados.decisao;
                 porcentagemKo.innerHTML = `(${dados.porcentagem_ko}%)`;
                 porcentagemSubmissao.innerHTML = `(${dados.porcentagem_finalizacao}%)`;
-                porcentagemDecisao.innerHTML = `(${dados.porcentagem_decisao}%)`; 
+                porcentagemDecisao.innerHTML = `(${dados.porcentagem_decisao}%)`;
             })
     }
 
@@ -356,13 +373,14 @@
             })
             .then(function (resposta) {
                 var dados = resposta[0];
+                console.log(dados)
                 precisaoGolpes.innerHTML = `${dados.precisao_golpes}%`;
                 precisaoQuedas.innerHTML = `${dados.precisao_quedas}%`;
                 golpesConectados.innerHTML = dados.golpes_sig_conectados_total;
                 golpesDesferidos.innerHTML = dados.golpes_sig_desferidos_total;
                 quedasAplicadas.innerHTML = dados.quedas_aplicadas;
                 quedasTentativas.innerHTML = dados.quedas_tentativas;
-                golpesConecMin.innerHTML = dados.golpes_sig_conectados_total;
+                golpesConecMin.innerHTML = dados.golpes_sig_conectados_por_min;
                 golpesAbsMin.innerHTML = dados.golpes_sig_absorvidos_por_min;
                 defesaGolpes.innerHTML = `${dados.golpes_sig_defesa_porcentagem}%`;
                 mediaKnock.innerHTML = dados.media_knockdowns_por_15_min;
@@ -423,4 +441,48 @@
 
             })
     }
+
+    function carregarUltimaLuta() {
+        fetch(`/lutas/ultima/${idLutador}`)
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (resposta) { // Estudar isso
+                var dados = resposta[0];
+                perfilLutadorRed.src = dados.perfil1;
+                perfilLutadorBlue.src = dados.perfil2;
+                nomeLutadorRed.innerHTML = dados.lutador1;
+                nomeLutadorBlue.innerHTML = dados.lutador2;
+                nomeEvento.innerHTML = dados.evento;
+                dataLuta.innerHTML = new Date(dados.dt_evento)
+                    .toLocaleDateString('pt-BR');
+            })
+    }
+
+    function carregarProximaLuta() {
+        fetch(`/lutas/proxima/${idLutador}`)
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then(function (resposta) { // Estudar isso
+
+                // if (resposta.length == 0) {
+                //     return;
+                // }
+                var dados = resposta[0];
+                console.log(dados)
+                perfilLutadorRedProx.src = dados.perfil1;
+                perfilLutadorBlueProx.src = dados.perfil2;
+                nomeLutadorRedProx.innerHTML = dados.lutador1;
+                nomeLutadorBlueProx.innerHTML = dados.lutador2;
+                nomeEventoProx.innerHTML = dados.evento;
+                dataLutaProx.innerHTML = new Date(dados.dt_evento)
+                    .toLocaleDateString('pt-BR');
+            })
+    }
+</script>
+<script src="../js/autenticacao.js"></script>
+
+<script>
+    verificarLogin();
 </script>
