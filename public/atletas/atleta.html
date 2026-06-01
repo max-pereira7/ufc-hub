@@ -22,7 +22,7 @@
             <a href="../ranking.html">Rankings</a>
             <a href="../museu.html">Museu UFC</a>
             <a href="../simulador.html">Simulador de Lutas</a>
-            <a href="../login.html">Login</a>
+            <a href="../login.html" id="linkLogin">Login</a>
         </nav>
     </header>
     <section class="fighter-page">
@@ -300,8 +300,9 @@
 </html>
 
 <script>
-
     window.onload = function () {
+        atualizarHeader();
+        verificarLogin();
         carregarDadosLutador();
         carregarDadosCartel();
         carregarEstatisticas();
@@ -482,7 +483,3 @@
     }
 </script>
 <script src="../js/autenticacao.js"></script>
-
-<script>
-    verificarLogin();
-</script>

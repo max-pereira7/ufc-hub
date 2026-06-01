@@ -21,8 +21,7 @@
             <a href="ranking.html">Rankings</a>
             <a href="#"><span class="active">Museu UFC</span></a>
             <a href="simulador.html">Simulador de Lutas</a>
-            <a href="login.html">Login</a>
-            <a href="login.html" style="display: none;">Sair</a>
+            <a href="login.html" id="linkLogin">Login</a>
         </nav>
     </header>
     <section class="museum-page">
@@ -176,8 +175,11 @@
 </body>
 
 </html>
-<script src="../js/autenticacao.js"></script>
+<script src="js/autenticacao.js"></script>
 
 <script>
-    verificarLogin();
+    window.onload = function () {
+        atualizarHeader();
+        verificarLogin();
+    }
 </script>

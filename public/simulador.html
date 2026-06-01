@@ -22,7 +22,7 @@
             <a href="ranking.html">Rankings</a>
             <a href="museu.html">Museu UFC</a>
             <a href="#"><span class="active">Simulador de Lutas</span></a>
-            <a href="login.html">Login</a>
+            <a href="login.html" id="linkLogin">Login</a>
         </nav>
     </header>
 
@@ -178,10 +178,6 @@
 
 <script>
 
-    window.onload = function () {
-        carregarLutadores();
-    }
-
     function carregarLutadores() {
 
         fetch("/lutadores/listar")
@@ -233,6 +229,7 @@
                 imgLutador1.src = lutador1.imagem;
 
                 nomeLutador1.innerHTML = lutador1.nome;
+
                 var dataNascimento = new Date(lutador1.dt_nascimento);
 
                 var anoNascimento = dataNascimento.getFullYear();
@@ -243,15 +240,17 @@
 
                 lutador1.idade = idade;
 
-                idadeLutador1.innerHTML = `${idade}`;
-                alturaLutador1.innerHTML = `${lutador1.altura}`;
+                idadeLutador1.innerHTML = idade;
+                alturaLutador1.innerHTML = lutador1.altura;
                 pesoLutador1.innerHTML = lutador1.peso;
 
-            });
+                return fetch(`/lutadores/cartel/${idLutador}`);
 
-        fetch(`/lutadores/cartel/${idLutador}`)
+            })
             .then(function (resposta) {
+
                 return resposta.json();
+
             })
             .then(function (resposta) {
 
@@ -264,12 +263,12 @@
                 lutador1.finalizacao = cartel.finalizacao;
                 lutador1.decisao = cartel.decisao;
 
-                cartelLutador1.innerHTML = `
-                ${cartel.vitorias}-${cartel.derrotas}-${cartel.empates}
-            `;
+                cartelLutador1.innerHTML =
+                    `${cartel.vitorias}-${cartel.derrotas}-${cartel.empates}`;
 
             });
     }
+
 
     function trocarLutador2() {
 
@@ -286,6 +285,7 @@
                 lutador2 = resposta[0];
 
                 imgLutador2.src = lutador2.imagem;
+
                 nomeLutador2.innerHTML = lutador2.nome;
 
                 var dataNascimento = new Date(lutador2.dt_nascimento);
@@ -298,15 +298,17 @@
 
                 lutador2.idade = idade;
 
-                idadeLutador2.innerHTML = `${idade}`;
-                alturaLutador2.innerHTML = `${lutador2.altura}`;
+                idadeLutador2.innerHTML = idade;
+                alturaLutador2.innerHTML = lutador2.altura;
                 pesoLutador2.innerHTML = lutador2.peso;
 
-            });
+                return fetch(`/lutadores/cartel/${idLutador}`);
 
-        fetch(`/lutadores/cartel/${idLutador}`)
+            })
             .then(function (resposta) {
+
                 return resposta.json();
+
             })
             .then(function (resposta) {
 
@@ -319,15 +321,23 @@
                 lutador2.finalizacao = cartel.finalizacao;
                 lutador2.decisao = cartel.decisao;
 
-                cartelLutador2.innerHTML = `
-                ${cartel.vitorias}-${cartel.derrotas}-${cartel.empates}
-            `;
+                cartelLutador2.innerHTML =
+                    `${cartel.vitorias}-${cartel.derrotas}-${cartel.empates}`;
 
             });
 
     }
 
     function simularLuta() {
+        if (!lutador1 || !lutador2) {
+            alert("Selecione os dois lutadores.");
+            return;
+        }
+
+        if (selectLutador1.value == selectLutador2.value) {
+            alert("Escolha lutadores diferentes.");
+            return;
+        }
 
         var pontos1 = calcularPontuacao(lutador1);
 
@@ -351,61 +361,79 @@
 
         nomeChance2.innerHTML = lutador2.nome;
 
+        var favorito;
+        var metodo;
+
         if (chance1 > chance2) {
-            vencedor.innerHTML = `<span style="color:white; font-family: 'Bebas Neue'">${lutador1.nome}</span> é o favorito! `;
-            if (lutador1.ko > lutador1.finalizacao && lutador1.ko > lutador1.decisao) {
-                vencedor.innerHTML += `Com uma vitória por KO/TKO!`;
-            } else if (lutador2.finalizacao > lutador2.ko && lutador2.finalizacao > lutador2.decisao) {
-                vencedor.innerHTML += `<span style="color:white; font-family: 'Bebas Neue'">Com uma Vitória por 
-                </span>Finalização!`;
-            }
-        } else if (chance1 < chance2) {
-            vencedor.innerHTML = `<span style="color:white; font-family: 'Bebas Neue'">${lutador2.nome}</span> é o favorito! `;
-            if (lutador1.ko > lutador1.finalizacao && lutador1.ko > lutador1.decisao) {
-                vencedor.innerHTML += `Com uma vitória por KO/TKO!`;
-            } else if (lutador2.finalizacao > lutador2.ko && lutador2.finalizacao > lutador2.decisao) {
-                vencedor.innerHTML += `<span style="color:white; font-family: 'Bebas Neue'">Com uma Vitória por 
-                </span>Finalização!`;
-            }
-
+            favorito = lutador1;
+        } else {
+            favorito = lutador2;
         }
 
-        function calcularPontuacao(lutador) {
-            var pontos = 0;
+        metodo = definirMetodo(favorito);
+        vencedor.innerHTML =
+        `<span style="color:white; font-family:'Bebas Neue'"> ${favorito.nome}</span> é o favorito!<br>
+        Vitória provável por <span style="color:white; font-family:'Bebas Neue'">${metodo}</span>`;
+    }
 
-            if (lutador.idade >= 27 && lutador.idade <= 34) {
-                pontos += 20;
-            }
+    function definirMetodo(lutador) {
 
-            if (lutador.idade > 35) {
-                pontos -= 25;
-            }
-
-            pontos += lutador.altura * 10;
-
-            pontos += lutador.peso * 20;
-
-            pontos += lutador.vitorias * 4;
-
-            pontos -= lutador.derrotas * 4;
-
-            if (lutador.derrotas == 0 && lutador.vitorias >= 15) {
-                pontos += 80;
-            }
-
-            var totalLutas =
-                lutador.vitorias +
-                lutador.derrotas +
-                lutador.empates;
-
-            pontos += totalLutas * 0.5;
-
-            return pontos;
+        if (
+            lutador.ko >= lutador.finalizacao &&
+            lutador.ko >= lutador.decisao
+        ) {
+            return "KO/TKO";
         }
+
+        if (
+            lutador.finalizacao >= lutador.ko &&
+            lutador.finalizacao >= lutador.decisao
+        ) {
+            return "Finalização";
+        }
+
+        return "Decisão";
+    }
+
+    function calcularPontuacao(lutador) {
+        var pontos = 0;
+
+        if (lutador.idade >= 27 && lutador.idade <= 34) {
+            pontos += 30;
+        }
+
+        if (lutador.idade > 35) {
+            pontos -= 35;
+        }
+
+        pontos += lutador.altura * 10;
+
+        pontos += lutador.peso * 20;
+
+        pontos += lutador.vitorias * 4;
+
+        pontos -= lutador.derrotas * 4;
+
+        if (lutador.derrotas == 0 && lutador.vitorias >= 15) {
+            pontos += 70;
+        }
+
+        var totalLutas =
+            lutador.vitorias +
+            lutador.derrotas +
+            lutador.empates;
+
+        pontos += totalLutas * 0.5;
+
+        return pontos;
     }
 </script>
-<script src="../js/autenticacao.js"></script>
+<script src="js/autenticacao.js"></script>
 
 <script>
-    verificarLogin();
+    window.onload = function () {
+        atualizarHeader();
+        verificarLogin();
+        carregarLutadores();
+    }
 </script>
