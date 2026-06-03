@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/perfil.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/footer.css">
+</head>
+
+<body>
+    <header class="header">
+        <a href="index.html">
+            <img src="assets/ufchub-logo.png" class="logo">
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="ranking.html">Rankings</a>
+            <a href="museu.html">Museu UFC</a>
+            <a href="simulador.html">Simulador de Lutas</a>
+            <a href="#" id="linkLogin"><span class="active">Perfil</span></a>
+        </nav>
+    </header>
+    <section class="login-page">
+        <div class="login-container">
+
+            <h2><span>Meu Perfil</span></h2>
+            <p>Confira suas informações ou saia da sua conta</p>
+
+            <form>
+                <input type="text" id="inp_nome" placeholder="Nome" readonly>
+                <input type="email" id="inp_email" placeholder="E-mail" readonly>
+                <button type="button" class="delete-btn" onclick="sair()">Sair</button>
+            </form>
+
+        </div>
+    </section>
+    <footer class="footer">
+        <p>© 2026 UFC Hub | Todos direitos reservados</p>
+    </footer>
+</body>
+
+</html>
+<script src="js/autenticacao.js"></script>
+<script>
+    function sair() {
+
+        sessionStorage.clear();
+
+        window.location = "login.html";
+    }
+
+    window.onload = function () {
+
+        inp_nome.value = sessionStorage.NOME_USUARIO;
+        inp_email.value = sessionStorage.EMAIL_USUARIO;
+
+    }
+</script>
